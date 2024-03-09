@@ -1,7 +1,9 @@
+# Retrieve the client's IP address using an HTTP request to ifconfig.co
 data "http" "myip" {
     url = "http://ifconfig.co"
 }
 
+# Fetch the metadata of the 'exp-infra-secrets' secret stored in AWS Secrets Manager
 data "aws_secretsmanager_secret" "exp-infra-secrets" {
     name = "exp-infra-secrets"
 }
@@ -21,6 +23,7 @@ data "aws_iam_policy_document" "secrets-manager-policy" {
         ]
     }
 }
+# IAM policy document to allow an OIDC-authenticated role to assume a specific role using 'AssumeRoleWithWebIdentity'
 data "aws_iam_policy_document" "exp-oid-policy" {
     statement {
         actions = ["sts:AssumeRoleWithWebIdentity"]
